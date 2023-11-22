@@ -8,9 +8,9 @@ import {
 } from "matchstick-as/assembly/index"
 import { BigInt } from "@graphprotocol/graph-ts"
 import { PriceUpdate } from "../generated/schema"
-import { PriceUpdate as PriceUpdateEvent } from "../generated/Contract/Contract"
-import { handlePriceUpdate } from "../src/contract"
-import { createPriceUpdateEvent } from "./contract-utils"
+import { PriceUpdate as PriceUpdateEvent } from "../generated/DataStream/DataStream"
+import { handlePriceUpdate } from "../src/data-stream"
+import { createPriceUpdateEvent } from "./data-stream-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0

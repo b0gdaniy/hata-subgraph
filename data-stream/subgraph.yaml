@@ -3,11 +3,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: Contract
+    name: DataStream
     network: arbitrum-sepolia
     source:
       address: "0xadB3Bd81BE72479E13f038CDD9c4CA0c7E2357Fc"
-      abi: Contract
+      abi: DataStream
       startBlock: 1328102
     mapping:
       kind: ethereum/events
@@ -16,9 +16,9 @@ dataSources:
       entities:
         - PriceUpdate
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
+        - name: DataStream
+          file: ./abis/DataStream.json
       eventHandlers:
         - event: PriceUpdate(indexed int192)
           handler: handlePriceUpdate
-      file: ./src/contract.ts
+      file: ./src/data-stream.ts

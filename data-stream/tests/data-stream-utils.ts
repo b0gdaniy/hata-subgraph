@@ -1,6 +1,6 @@
 import { newMockEvent } from "matchstick-as"
 import { ethereum, BigInt } from "@graphprotocol/graph-ts"
-import { PriceUpdate } from "../generated/Contract/Contract"
+import { PriceUpdate } from "../generated/DataStream/DataStream"
 
 export function createPriceUpdateEvent(price: BigInt): PriceUpdate {
   let priceUpdateEvent = changetype<PriceUpdate>(newMockEvent())

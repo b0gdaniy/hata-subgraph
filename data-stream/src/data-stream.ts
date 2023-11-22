@@ -1,4 +1,4 @@
-import { PriceUpdate as PriceUpdateEvent } from "../generated/Contract/Contract"
+import { PriceUpdate as PriceUpdateEvent } from "../generated/DataStream/DataStream"
 import { PriceUpdate } from "../generated/schema"
 
 export function handlePriceUpdate(event: PriceUpdateEvent): void {
