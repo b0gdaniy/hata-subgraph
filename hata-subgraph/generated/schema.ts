@@ -161,19 +161,6 @@ export class Property extends Entity {
     this.set("propertyID", Value.fromBytes(value));
   }
 
-  get folderCID(): Bytes {
-    let value = this.get("folderCID");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set folderCID(value: Bytes) {
-    this.set("folderCID", Value.fromBytes(value));
-  }
-
   get title(): string {
     let value = this.get("title");
     if (!value || value.kind == ValueKind.NULL) {
@@ -198,5 +185,22 @@ export class Property extends Entity {
 
   set area(value: i32) {
     this.set("area", Value.fromI32(value));
+  }
+
+  get price(): BigInt | null {
+    let value = this.get("price");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set price(value: BigInt | null) {
+    if (!value) {
+      this.unset("price");
+    } else {
+      this.set("price", Value.fromBigInt(<BigInt>value));
+    }
   }
 }
