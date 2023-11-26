@@ -107,7 +107,7 @@ export class PriceUpdate extends Entity {
   }
 }
 
-export class PropertyAdded extends Entity {
+export class Property extends Entity {
   constructor(id: Bytes) {
     super();
     this.set("id", Value.fromBytes(id));
@@ -115,26 +115,24 @@ export class PropertyAdded extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save PropertyAdded entity without an ID");
+    assert(id != null, "Cannot save Property entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.BYTES,
-        `Entities of type PropertyAdded must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Property must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("PropertyAdded", id.toBytes().toHexString(), this);
+      store.set("Property", id.toBytes().toHexString(), this);
     }
   }
 
-  static loadInBlock(id: Bytes): PropertyAdded | null {
-    return changetype<PropertyAdded | null>(
-      store.get_in_block("PropertyAdded", id.toHexString())
+  static loadInBlock(id: Bytes): Property | null {
+    return changetype<Property | null>(
+      store.get_in_block("Property", id.toHexString())
     );
   }
 
-  static load(id: Bytes): PropertyAdded | null {
-    return changetype<PropertyAdded | null>(
-      store.get("PropertyAdded", id.toHexString())
-    );
+  static load(id: Bytes): Property | null {
+    return changetype<Property | null>(store.get("Property", id.toHexString()));
   }
 
   get id(): Bytes {
@@ -148,6 +146,19 @@ export class PropertyAdded extends Entity {
 
   set id(value: Bytes) {
     this.set("id", Value.fromBytes(value));
+  }
+
+  get isActive(): boolean {
+    let value = this.get("isActive");
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
+  }
+
+  set isActive(value: boolean) {
+    this.set("isActive", Value.fromBoolean(value));
   }
 
   get landlord(): Bytes {
@@ -213,44 +224,5 @@ export class PropertyAdded extends Entity {
 
   set area(value: i32) {
     this.set("area", Value.fromI32(value));
-  }
-
-  get blockNumber(): BigInt {
-    let value = this.get("blockNumber");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set blockNumber(value: BigInt) {
-    this.set("blockNumber", Value.fromBigInt(value));
-  }
-
-  get blockTimestamp(): BigInt {
-    let value = this.get("blockTimestamp");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set blockTimestamp(value: BigInt) {
-    this.set("blockTimestamp", Value.fromBigInt(value));
-  }
-
-  get transactionHash(): Bytes {
-    let value = this.get("transactionHash");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set transactionHash(value: Bytes) {
-    this.set("transactionHash", Value.fromBytes(value));
   }
 }
