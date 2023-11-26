@@ -1,0 +1,12 @@
+{
+  "arbitrum-sepolia": {
+    "DataStream": {
+      "address": "0xadb3bd81be72479e13f038cdd9c4ca0c7e2357fc",
+      "startBlock": 1328102
+    },
+    "Registry": {
+      "address": "0x0a9dac3ec44cf79e7a26710a8513557966279270",
+      "startBlock": 1540864
+    }
+  }
+}
