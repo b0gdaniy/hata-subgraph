@@ -9,7 +9,8 @@ type Property @entity {
   isActive: Boolean
   landlord: Bytes! # address
   propertyID: Bytes! # bytes32
-  folderCID: Bytes! # bytes32
   title: String! # string
   area: Int! # uint16
+  price: BigInt # uint256
+  #image: String! # string
 }

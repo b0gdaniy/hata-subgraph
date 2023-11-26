@@ -10,6 +10,7 @@ export function handleActiveProperty(event: ListingCreated): void {
 		property.isActive = true
 	}
 
+	property.price = event.params._price;
 
 	property.save()
 }
