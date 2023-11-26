@@ -176,17 +176,17 @@ export class PropertyAdded extends Entity {
     this.set("propertyID", Value.fromBytes(value));
   }
 
-  get folderCID(): string {
+  get folderCID(): Bytes {
     let value = this.get("folderCID");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toString();
+      return value.toBytes();
     }
   }
 
-  set folderCID(value: string) {
-    this.set("folderCID", Value.fromString(value));
+  set folderCID(value: Bytes) {
+    this.set("folderCID", Value.fromBytes(value));
   }
 
   get title(): string {

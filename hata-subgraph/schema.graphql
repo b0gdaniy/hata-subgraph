@@ -9,7 +9,7 @@ type PropertyAdded @entity(immutable: true) {
   id: Bytes!
   landlord: Bytes! # address
   propertyID: Bytes! # bytes32
-  folderCID: String! # string
+  folderCID: Bytes! # bytes32
   title: String! # string
   area: Int! # uint16
   blockNumber: BigInt!
