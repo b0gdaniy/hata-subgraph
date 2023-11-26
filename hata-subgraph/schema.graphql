@@ -6,7 +6,7 @@ type PriceUpdate @entity {
 
 type Property @entity {
   id: Bytes!
-  isActive: Boolean!
+  isActive: Boolean
   landlord: Bytes! # address
   propertyID: Bytes! # bytes32
   folderCID: Bytes! # bytes32
