@@ -34,7 +34,7 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - PropertyAdded
+        - Property
       abis:
         - name: Registry
           file: ./abis/Registry.json
@@ -42,3 +42,24 @@ dataSources:
         - event: PropertyAdded(indexed address,indexed bytes32,indexed string,string,uint16)
           handler: handlePropertyAdded
       file: ./src/registry.ts
+  - kind: ethereum
+    name: Marketplace
+    network: arbitrum-sepolia
+    source:
+      # TODO: change to the deployed correct
+      address: "0x0a9dac3ec44cf79e7a26710a8513557966279270"
+      abi: Marketplace
+      startBlock: 1540864
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ActiveProperty
+      abis:
+        - name: Marketplace
+          file: ./abis/Marketplace.json
+      eventHandlers:
+        - event: ListingCreated(bytes32,uint256)
+          handler: handleActiveProperty
+      file: ./src/marketplace.ts
