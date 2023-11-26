@@ -1,0 +1,18 @@
+type PriceUpdate @entity(immutable: true) {
+  id: Bytes!
+  price: BigInt! # int192
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+type PropertyAdded @entity(immutable: true) {
+  id: Bytes!
+  landlord: Bytes! # address
+  propertyID: Bytes! # bytes32
+  folderCID: String! # string
+  title: String! # string
+  area: Int! # uint16
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

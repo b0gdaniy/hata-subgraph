@@ -1,7 +1,0 @@
-type PriceUpdate @entity(immutable: true) {
-  id: Bytes!
-  price: BigInt! # int192
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}

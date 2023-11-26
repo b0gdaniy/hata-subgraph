@@ -1,0 +1,44 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DataStream
+    network: arbitrum-sepolia
+    source:
+      address: "0xadb3bd81be72479e13f038cdd9c4ca0c7e2357fc"
+      abi: DataStream
+      startBlock: 1328102
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PriceUpdate
+      abis:
+        - name: DataStream
+          file: ./abis/DataStream.json
+      eventHandlers:
+        - event: PriceUpdate(indexed int192)
+          handler: handlePriceUpdate
+      file: ./src/data-stream.ts
+  - kind: ethereum
+    name: Registry
+    network: arbitrum-sepolia
+    source:
+      address: "0x0a9dac3ec44cf79e7a26710a8513557966279270"
+      abi: Registry
+      startBlock: 1540864
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PropertyAdded
+      abis:
+        - name: Registry
+          file: ./abis/Registry.json
+      eventHandlers:
+        - event: PropertyAdded(indexed address,indexed bytes32,indexed string,string,uint16)
+          handler: handlePropertyAdded
+      file: ./src/registry.ts
