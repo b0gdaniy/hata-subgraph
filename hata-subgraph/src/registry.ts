@@ -3,8 +3,10 @@ import { Property } from "../generated/schema"
 
 export function handlePropertyAdded(event: PropertyAdded): void {
   let property = Property.load(event.params.propertyID)
+
   if (property === null) {
     property = new Property(event.params.propertyID)
+    property.isActive = false
   }
 
   property.landlord = event.params.landlord
