@@ -1,3 +1,4 @@
+#TODO: remove blockNumber,transactionHash
 type PriceUpdate @entity(immutable: true) {
   id: Bytes!
   price: BigInt! # int192
@@ -5,14 +6,13 @@ type PriceUpdate @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
-type PropertyAdded @entity(immutable: true) {
+
+type Property @entity {
   id: Bytes!
+  isActive: Boolean!
   landlord: Bytes! # address
   propertyID: Bytes! # bytes32
   folderCID: Bytes! # bytes32
   title: String! # string
   area: Int! # uint16
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
 }
