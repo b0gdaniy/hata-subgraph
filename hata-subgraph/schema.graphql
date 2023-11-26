@@ -1,10 +1,7 @@
-#TODO: remove blockNumber,transactionHash
-type PriceUpdate @entity(immutable: true) {
+type PriceUpdate @entity {
   id: Bytes!
   price: BigInt! # int192
-  blockNumber: BigInt!
   blockTimestamp: BigInt!
-  transactionHash: Bytes!
 }
 
 type Property @entity {
