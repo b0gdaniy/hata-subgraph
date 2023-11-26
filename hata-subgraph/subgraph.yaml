@@ -62,4 +62,6 @@ dataSources:
       eventHandlers:
         - event: ListingCreated(bytes32,uint256)
           handler: handleActiveProperty
+        - event: ListingAccepted(bytes32,address,uint256)
+          handler: handleInactiveProperty
       file: ./src/marketplace.ts
