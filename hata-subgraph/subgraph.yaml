@@ -46,10 +46,9 @@ dataSources:
     name: Marketplace
     network: arbitrum-sepolia
     source:
-      # TODO: change to the deployed correct as well as in networks
-      address: "0x0a9dac3ec44cf79e7a26710a8513557966279270"
+      address: "0xf7c4cd5CA0e2aB2609688b2662A35aA24e7F93Eb"
       abi: Marketplace
-      startBlock: 1540864
+      startBlock: 1545942
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
