@@ -46,7 +46,7 @@ dataSources:
     name: Marketplace
     network: arbitrum-sepolia
     source:
-      # TODO: change to the deployed correct
+      # TODO: change to the deployed correct as well as in networks
       address: "0x0a9dac3ec44cf79e7a26710a8513557966279270"
       abi: Marketplace
       startBlock: 1540864
