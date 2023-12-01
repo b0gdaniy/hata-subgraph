@@ -56,6 +56,10 @@ export class ListingCreated__Params {
   get _price(): BigInt {
     return this._event.parameters[1].value.toBigInt();
   }
+
+  get _payment(): i32 {
+    return this._event.parameters[2].value.toI32();
+  }
 }
 
 export class Marketplace__getListingResultValue0Struct extends ethereum.Tuple {
@@ -63,20 +67,24 @@ export class Marketplace__getListingResultValue0Struct extends ethereum.Tuple {
     return this[0].toBigInt();
   }
 
-  get status(): i32 {
+  get payment(): i32 {
     return this[1].toI32();
   }
 
+  get status(): i32 {
+    return this[2].toI32();
+  }
+
   get tenant(): Address {
-    return this[2].toAddress();
+    return this[3].toAddress();
   }
 
   get rentUntil(): BigInt {
-    return this[3].toBigInt();
+    return this[4].toBigInt();
   }
 
   get isNative(): boolean {
-    return this[4].toBoolean();
+    return this[5].toBoolean();
   }
 }
 
@@ -85,20 +93,24 @@ export class Marketplace__getListingWithDataResultValue0Struct extends ethereum.
     return this[0].toBigInt();
   }
 
-  get status(): i32 {
+  get payment(): i32 {
     return this[1].toI32();
   }
 
+  get status(): i32 {
+    return this[2].toI32();
+  }
+
   get tenant(): Address {
-    return this[2].toAddress();
+    return this[3].toAddress();
   }
 
   get rentUntil(): BigInt {
-    return this[3].toBigInt();
+    return this[4].toBigInt();
   }
 
   get isNative(): boolean {
-    return this[4].toBoolean();
+    return this[5].toBoolean();
   }
 }
 
@@ -183,7 +195,7 @@ export class Marketplace extends ethereum.SmartContract {
   getListing(_propertyID: Bytes): Marketplace__getListingResultValue0Struct {
     let result = super.call(
       "getListing",
-      "getListing(bytes32):((uint256,uint8,address,uint256,bool))",
+      "getListing(bytes32):((uint256,uint8,uint8,address,uint256,bool))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
 
@@ -197,7 +209,7 @@ export class Marketplace extends ethereum.SmartContract {
   ): ethereum.CallResult<Marketplace__getListingResultValue0Struct> {
     let result = super.tryCall(
       "getListing",
-      "getListing(bytes32):((uint256,uint8,address,uint256,bool))",
+      "getListing(bytes32):((uint256,uint8,uint8,address,uint256,bool))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
     if (result.reverted) {
@@ -214,7 +226,7 @@ export class Marketplace extends ethereum.SmartContract {
   ): Marketplace__getListingWithDataResult {
     let result = super.call(
       "getListingWithData",
-      "getListingWithData(bytes32):((uint256,uint8,address,uint256,bool),(bytes32,string,address,uint16,string))",
+      "getListingWithData(bytes32):((uint256,uint8,uint8,address,uint256,bool),(bytes32,string,address,uint16,string))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
 
@@ -235,7 +247,7 @@ export class Marketplace extends ethereum.SmartContract {
   ): ethereum.CallResult<Marketplace__getListingWithDataResult> {
     let result = super.tryCall(
       "getListingWithData",
-      "getListingWithData(bytes32):((uint256,uint8,address,uint256,bool),(bytes32,string,address,uint16,string))",
+      "getListingWithData(bytes32):((uint256,uint8,uint8,address,uint256,bool),(bytes32,string,address,uint16,string))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
     if (result.reverted) {
@@ -354,8 +366,12 @@ export class CreateListingCall__Inputs {
     return this._call.inputValues[1].value.toBigInt();
   }
 
+  get _payment(): i32 {
+    return this._call.inputValues[2].value.toI32();
+  }
+
   get _isNative(): boolean {
-    return this._call.inputValues[2].value.toBoolean();
+    return this._call.inputValues[3].value.toBoolean();
   }
 }
 

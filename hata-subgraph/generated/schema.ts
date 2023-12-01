@@ -203,4 +203,17 @@ export class Property extends Entity {
       this.set("price", Value.fromBigInt(<BigInt>value));
     }
   }
+
+  get payment(): i32 {
+    let value = this.get("payment");
+    if (!value || value.kind == ValueKind.NULL) {
+      return 0;
+    } else {
+      return value.toI32();
+    }
+  }
+
+  set payment(value: i32) {
+    this.set("payment", Value.fromI32(value));
+  }
 }
