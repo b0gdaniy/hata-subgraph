@@ -11,6 +11,7 @@ export function handleActiveProperty(event: ListingCreated): void {
 	}
 
 	property.price = event.params._price;
+	property.payment = event.params._payment;
 
 	property.save()
 }
