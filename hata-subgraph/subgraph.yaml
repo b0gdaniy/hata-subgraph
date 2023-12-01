@@ -59,7 +59,7 @@ dataSources:
         - name: Marketplace
           file: ./abis/Marketplace.json
       eventHandlers:
-        - event: ListingCreated(bytes32,uint256)
+        - event: ListingCreated(bytes32,uint256,uint8)
           handler: handleActiveProperty
         - event: ListingAccepted(bytes32,address,uint256)
           handler: handleInactiveProperty

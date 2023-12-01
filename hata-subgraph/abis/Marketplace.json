@@ -74,6 +74,12 @@
         "internalType": "uint256",
         "name": "_price",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum PaymentType",
+        "name": "_payment",
+        "type": "uint8"
       }
     ],
     "name": "ListingCreated",
@@ -115,6 +121,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "enum PaymentType",
+        "name": "_payment",
+        "type": "uint8"
+      },
+      {
         "internalType": "bool",
         "name": "_isNative",
         "type": "bool"
@@ -154,6 +165,11 @@
             "internalType": "uint256",
             "name": "price",
             "type": "uint256"
+          },
+          {
+            "internalType": "enum PaymentType",
+            "name": "payment",
+            "type": "uint8"
           },
           {
             "internalType": "enum PropertyStatus",
@@ -200,6 +216,11 @@
             "internalType": "uint256",
             "name": "price",
             "type": "uint256"
+          },
+          {
+            "internalType": "enum PaymentType",
+            "name": "payment",
+            "type": "uint8"
           },
           {
             "internalType": "enum PropertyStatus",
