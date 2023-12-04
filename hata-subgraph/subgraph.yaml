@@ -6,9 +6,9 @@ dataSources:
     name: DataStream
     network: arbitrum-sepolia
     source:
-      address: "0xadb3bd81be72479e13f038cdd9c4ca0c7e2357fc"
+      address: "0xf8c08bDC961DE7D0C2185c4d25C9e95829ffeE65"
       abi: DataStream
-      startBlock: 1328102
+      startBlock: 2019606
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -26,9 +26,9 @@ dataSources:
     name: Registry
     network: arbitrum-sepolia
     source:
-      address: "0x0a9dac3ec44cf79e7a26710a8513557966279270"
+      address: "0xD69aFaF7298bBd14dF17a0997538c5363Af6335d"
       abi: Registry
-      startBlock: 1540864
+      startBlock: 2019615
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -46,9 +46,9 @@ dataSources:
     name: Marketplace
     network: arbitrum-sepolia
     source:
-      address: "0xf7c4cd5CA0e2aB2609688b2662A35aA24e7F93Eb"
+      address: "0xcF81B08cbCa47fcbB4669c002774c7C405AD67dD"
       abi: Marketplace
-      startBlock: 1545942
+      startBlock: 2019616
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
