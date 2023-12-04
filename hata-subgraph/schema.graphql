@@ -12,5 +12,6 @@ type Property @entity {
   title: String! # string
   area: Int! # uint16
   price: BigInt # uint256
+  payment: Int! # uint8 (PaymentType enum)
   #image: String! # string
 }
