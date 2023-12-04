@@ -14,13 +14,13 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - PriceUpdate
+        - Price
       abis:
         - name: DataStream
           file: ./abis/DataStream.json
       eventHandlers:
-        - event: PriceUpdate(indexed int192)
-          handler: handlePriceUpdate
+        - event: PriceUpdated(indexed uint256)
+          handler: handlePriceUpdated
       file: ./src/data-stream.ts
   - kind: ethereum
     name: Registry
@@ -39,7 +39,7 @@ dataSources:
         - name: Registry
           file: ./abis/Registry.json
       eventHandlers:
-        - event: PropertyAdded(indexed address,indexed bytes32,indexed string,string,uint16)
+        - event: PropertyAdded(indexed bytes32,address,string,uint16,string)
           handler: handlePropertyAdded
       file: ./src/registry.ts
   - kind: ethereum
@@ -54,13 +54,13 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - ActiveProperty
+        - Property
       abis:
         - name: Marketplace
           file: ./abis/Marketplace.json
       eventHandlers:
         - event: ListingCreated(bytes32,uint256,uint8)
           handler: handleActiveProperty
-        - event: ListingAccepted(bytes32,address,uint256)
+        - event: ListingAccepted(bytes32,address,uint256,uint256)
           handler: handleInactiveProperty
       file: ./src/marketplace.ts
