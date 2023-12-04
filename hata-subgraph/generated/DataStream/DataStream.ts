@@ -10,16 +10,16 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
-export class PriceUpdate extends ethereum.Event {
-  get params(): PriceUpdate__Params {
-    return new PriceUpdate__Params(this);
+export class PriceUpdated extends ethereum.Event {
+  get params(): PriceUpdated__Params {
+    return new PriceUpdated__Params(this);
   }
 }
 
-export class PriceUpdate__Params {
-  _event: PriceUpdate;
+export class PriceUpdated__Params {
+  _event: PriceUpdated;
 
-  constructor(event: PriceUpdate) {
+  constructor(event: PriceUpdated) {
     this._event = event;
   }
 
@@ -277,7 +277,7 @@ export class DataStream extends ethereum.SmartContract {
   latestETHUSDPrice(): BigInt {
     let result = super.call(
       "latestETHUSDPrice",
-      "latestETHUSDPrice():(int192)",
+      "latestETHUSDPrice():(uint256)",
       []
     );
 
@@ -287,7 +287,7 @@ export class DataStream extends ethereum.SmartContract {
   try_latestETHUSDPrice(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "latestETHUSDPrice",
-      "latestETHUSDPrice():(int192)",
+      "latestETHUSDPrice():(uint256)",
       []
     );
     if (result.reverted) {

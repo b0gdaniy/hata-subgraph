@@ -23,24 +23,24 @@ export class PropertyAdded__Params {
     this._event = event;
   }
 
-  get landlord(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
   get propertyID(): Bytes {
-    return this._event.parameters[1].value.toBytes();
+    return this._event.parameters[0].value.toBytes();
   }
 
-  get folderCID(): Bytes {
-    return this._event.parameters[2].value.toBytes();
+  get landlord(): Address {
+    return this._event.parameters[1].value.toAddress();
   }
 
-  get title(): string {
-    return this._event.parameters[3].value.toString();
+  get location(): string {
+    return this._event.parameters[2].value.toString();
   }
 
   get area(): i32 {
-    return this._event.parameters[4].value.toI32();
+    return this._event.parameters[3].value.toI32();
+  }
+
+  get previewCID(): string {
+    return this._event.parameters[4].value.toString();
   }
 }
 
@@ -49,20 +49,28 @@ export class Registry__getPropertyResultValue0Struct extends ethereum.Tuple {
     return this[0].toBytes();
   }
 
-  get title(): string {
+  get location(): string {
     return this[1].toString();
   }
 
-  get ownerAddress(): Address {
-    return this[2].toAddress();
+  get description(): string {
+    return this[2].toString();
+  }
+
+  get landlord(): Address {
+    return this[3].toAddress();
   }
 
   get area(): i32 {
-    return this[3].toI32();
+    return this[4].toI32();
+  }
+
+  get previewCID(): string {
+    return this[5].toString();
   }
 
   get folderCID(): string {
-    return this[4].toString();
+    return this[6].toString();
   }
 }
 
@@ -72,19 +80,23 @@ export class Registry extends ethereum.SmartContract {
   }
 
   addProperty(
-    _title: string,
-    _owner: Address,
+    _location: string,
+    _description: string,
+    _landlord: Address,
     _area: i32,
-    folderCID: string
+    _previewCID: string,
+    _folderCID: string
   ): Bytes {
     let result = super.call(
       "addProperty",
-      "addProperty(string,address,uint16,string):(bytes32)",
+      "addProperty(string,string,address,uint16,string,string):(bytes32)",
       [
-        ethereum.Value.fromString(_title),
-        ethereum.Value.fromAddress(_owner),
+        ethereum.Value.fromString(_location),
+        ethereum.Value.fromString(_description),
+        ethereum.Value.fromAddress(_landlord),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_area)),
-        ethereum.Value.fromString(folderCID)
+        ethereum.Value.fromString(_previewCID),
+        ethereum.Value.fromString(_folderCID)
       ]
     );
 
@@ -92,19 +104,23 @@ export class Registry extends ethereum.SmartContract {
   }
 
   try_addProperty(
-    _title: string,
-    _owner: Address,
+    _location: string,
+    _description: string,
+    _landlord: Address,
     _area: i32,
-    folderCID: string
+    _previewCID: string,
+    _folderCID: string
   ): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
       "addProperty",
-      "addProperty(string,address,uint16,string):(bytes32)",
+      "addProperty(string,string,address,uint16,string,string):(bytes32)",
       [
-        ethereum.Value.fromString(_title),
-        ethereum.Value.fromAddress(_owner),
+        ethereum.Value.fromString(_location),
+        ethereum.Value.fromString(_description),
+        ethereum.Value.fromAddress(_landlord),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_area)),
-        ethereum.Value.fromString(folderCID)
+        ethereum.Value.fromString(_previewCID),
+        ethereum.Value.fromString(_folderCID)
       ]
     );
     if (result.reverted) {
@@ -138,7 +154,7 @@ export class Registry extends ethereum.SmartContract {
   getProperty(_propertyID: Bytes): Registry__getPropertyResultValue0Struct {
     let result = super.call(
       "getProperty",
-      "getProperty(bytes32):((bytes32,string,address,uint16,string))",
+      "getProperty(bytes32):((bytes32,string,string,address,uint16,string,string))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
 
@@ -152,7 +168,7 @@ export class Registry extends ethereum.SmartContract {
   ): ethereum.CallResult<Registry__getPropertyResultValue0Struct> {
     let result = super.tryCall(
       "getProperty",
-      "getProperty(bytes32):((bytes32,string,address,uint16,string))",
+      "getProperty(bytes32):((bytes32,string,string,address,uint16,string,string))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
     if (result.reverted) {
@@ -164,21 +180,23 @@ export class Registry extends ethereum.SmartContract {
     );
   }
 
-  getPropertyByOwner(_owner: Address): Array<Bytes> {
+  getPropertyByOwner(_landlord: Address): Array<Bytes> {
     let result = super.call(
       "getPropertyByOwner",
       "getPropertyByOwner(address):(bytes32[])",
-      [ethereum.Value.fromAddress(_owner)]
+      [ethereum.Value.fromAddress(_landlord)]
     );
 
     return result[0].toBytesArray();
   }
 
-  try_getPropertyByOwner(_owner: Address): ethereum.CallResult<Array<Bytes>> {
+  try_getPropertyByOwner(
+    _landlord: Address
+  ): ethereum.CallResult<Array<Bytes>> {
     let result = super.tryCall(
       "getPropertyByOwner",
       "getPropertyByOwner(address):(bytes32[])",
-      [ethereum.Value.fromAddress(_owner)]
+      [ethereum.Value.fromAddress(_landlord)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -205,7 +223,7 @@ export class ConstructorCall__Inputs {
     this._call = call;
   }
 
-  get _owner(): Address {
+  get _landlord(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 }
@@ -235,20 +253,28 @@ export class AddPropertyCall__Inputs {
     this._call = call;
   }
 
-  get _title(): string {
+  get _location(): string {
     return this._call.inputValues[0].value.toString();
   }
 
-  get _owner(): Address {
-    return this._call.inputValues[1].value.toAddress();
+  get _description(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get _landlord(): Address {
+    return this._call.inputValues[2].value.toAddress();
   }
 
   get _area(): i32 {
-    return this._call.inputValues[2].value.toI32();
+    return this._call.inputValues[3].value.toI32();
   }
 
-  get folderCID(): string {
-    return this._call.inputValues[3].value.toString();
+  get _previewCID(): string {
+    return this._call.inputValues[4].value.toString();
+  }
+
+  get _folderCID(): string {
+    return this._call.inputValues[5].value.toString();
   }
 }
 
