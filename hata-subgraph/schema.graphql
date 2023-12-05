@@ -13,6 +13,5 @@ type Property @entity {
   area: Int! # uint16
   previewCID: String!
   price: BigInt # uint256
-  payment: Int! # uint8 (PaymentType enum)
-  #image: String! # string
+  payment: Int # uint8 (PaymentType enum)
 }
