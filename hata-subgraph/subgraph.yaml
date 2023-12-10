@@ -26,9 +26,9 @@ dataSources:
     name: Registry
     network: arbitrum-sepolia
     source:
-      address: "0xe8f256d9eda36e027030a7f1bdd8f9d35c9306eb"
+      address: "0x4a2af1bb289d2943c7ec620d380b262aae4351fc"
       abi: Registry
-      startBlock: 2019615
+      startBlock: 2445896
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -46,9 +46,9 @@ dataSources:
     name: Marketplace
     network: arbitrum-sepolia
     source:
-      address: "0x2e185df19b9be40b700eb1869400b7540a41d96b"
+      address: "0xc4860770331bdd2aa905613702a6b2f1e3f2355e"
       abi: Marketplace
-      startBlock: 2019616
+      startBlock: 2445899
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
