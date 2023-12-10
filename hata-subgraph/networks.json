@@ -5,12 +5,12 @@
       "startBlock": 2019606
     },
     "Registry": {
-      "address": "0xD69aFaF7298bBd14dF17a0997538c5363Af6335d",
-      "startBlock": 2019615
+      "address": "0xe8f256d9eda36e027030a7f1bdd8f9d35c9306eb",
+      "startBlock": 2441674
     },
     "Marketplace": {
-      "address": "0xcF81B08cbCa47fcbB4669c002774c7C405AD67dD",
-      "startBlock": 2019616
+      "address": "0x2e185df19b9be40b700eb1869400b7540a41d96b",
+      "startBlock": 2441677
     }
   }
 }
