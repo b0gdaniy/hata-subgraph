@@ -1,4 +1,4 @@
-type PriceUpdate @entity {
+type Price @entity {
   id: Bytes!
   price: BigInt! # int192
   blockTimestamp: BigInt!
@@ -7,11 +7,11 @@ type PriceUpdate @entity {
 type Property @entity {
   id: Bytes!
   isActive: Boolean
-  landlord: Bytes! # address
   propertyID: Bytes! # bytes32
-  title: String! # string
+  landlord: Bytes! # address
+  location: String!
   area: Int! # uint16
+  previewCID: String!
   price: BigInt # uint256
-  payment: Int! # uint8 (PaymentType enum)
-  #image: String! # string
+  payment: Int # uint8 (PaymentType enum)
 }

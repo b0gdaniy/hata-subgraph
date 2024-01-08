@@ -1,16 +1,16 @@
 {
   "arbitrum-sepolia": {
     "DataStream": {
-      "address": "0xadb3bd81be72479e13f038cdd9c4ca0c7e2357fc",
-      "startBlock": 1328102
+      "address": "0xf8c08bDC961DE7D0C2185c4d25C9e95829ffeE65",
+      "startBlock": 2019606
     },
     "Registry": {
-      "address": "0x0a9dac3ec44cf79e7a26710a8513557966279270",
-      "startBlock": 1540864
+      "address": "0x4a2af1bb289d2943c7ec620d380b262aae4351fc",
+      "startBlock": 2445896
     },
     "Marketplace": {
-      "address": "0xf7c4cd5CA0e2aB2609688b2662A35aA24e7F93Eb",
-      "startBlock": 1545942
+      "address": "0xc4860770331bdd2aa905613702a6b2f1e3f2355e",
+      "startBlock": 2445899
     }
   }
 }

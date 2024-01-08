@@ -11,8 +11,9 @@ export function handlePropertyAdded(event: PropertyAdded): void {
 
   property.landlord = event.params.landlord
   property.propertyID = event.params.propertyID
-  property.title = event.params.title
+  property.location = event.params.location
   property.area = event.params.area
+  property.previewCID = event.params.previewCID
 
   property.save()
 }

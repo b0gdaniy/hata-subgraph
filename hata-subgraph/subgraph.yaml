@@ -6,29 +6,29 @@ dataSources:
     name: DataStream
     network: arbitrum-sepolia
     source:
-      address: "0xadb3bd81be72479e13f038cdd9c4ca0c7e2357fc"
+      address: "0xf8c08bDC961DE7D0C2185c4d25C9e95829ffeE65"
       abi: DataStream
-      startBlock: 1328102
+      startBlock: 2019606
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - PriceUpdate
+        - Price
       abis:
         - name: DataStream
           file: ./abis/DataStream.json
       eventHandlers:
-        - event: PriceUpdate(indexed int192)
-          handler: handlePriceUpdate
+        - event: PriceUpdated(indexed uint256)
+          handler: handlePriceUpdated
       file: ./src/data-stream.ts
   - kind: ethereum
     name: Registry
     network: arbitrum-sepolia
     source:
-      address: "0x0a9dac3ec44cf79e7a26710a8513557966279270"
+      address: "0x4a2af1bb289d2943c7ec620d380b262aae4351fc"
       abi: Registry
-      startBlock: 1540864
+      startBlock: 2445896
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -39,28 +39,28 @@ dataSources:
         - name: Registry
           file: ./abis/Registry.json
       eventHandlers:
-        - event: PropertyAdded(indexed address,indexed bytes32,indexed string,string,uint16)
+        - event: PropertyAdded(indexed bytes32,address,string,uint16,string)
           handler: handlePropertyAdded
       file: ./src/registry.ts
   - kind: ethereum
     name: Marketplace
     network: arbitrum-sepolia
     source:
-      address: "0xf7c4cd5CA0e2aB2609688b2662A35aA24e7F93Eb"
+      address: "0xc4860770331bdd2aa905613702a6b2f1e3f2355e"
       abi: Marketplace
-      startBlock: 1545942
+      startBlock: 2445899
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - ActiveProperty
+        - Property
       abis:
         - name: Marketplace
           file: ./abis/Marketplace.json
       eventHandlers:
         - event: ListingCreated(bytes32,uint256,uint8)
           handler: handleActiveProperty
-        - event: ListingAccepted(bytes32,address,uint256)
+        - event: ListingAccepted(bytes32,address,uint256,uint256)
           handler: handleInactiveProperty
       file: ./src/marketplace.ts

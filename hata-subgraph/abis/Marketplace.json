@@ -27,12 +27,12 @@
   },
   {
     "inputs": [],
-    "name": "PropertyAlreadyActive",
+    "name": "PropertyNotNew",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "PropertyNotActive",
+    "name": "PropertyNotRent",
     "type": "error"
   },
   {
@@ -49,6 +49,12 @@
         "internalType": "address",
         "name": "_tenant",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_rentStart",
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -99,7 +105,12 @@
       },
       {
         "internalType": "uint256",
-        "name": "_rentUntil",
+        "name": "_rentStart",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_rentFinish",
         "type": "uint256"
       }
     ],
@@ -132,6 +143,19 @@
       }
     ],
     "name": "createListing",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_propertyID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "finishListing",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -183,7 +207,12 @@
           },
           {
             "internalType": "uint256",
-            "name": "rentUntil",
+            "name": "rentStart",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rentFinish",
             "type": "uint256"
           },
           {
@@ -234,7 +263,12 @@
           },
           {
             "internalType": "uint256",
-            "name": "rentUntil",
+            "name": "rentStart",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rentFinish",
             "type": "uint256"
           },
           {
@@ -256,18 +290,28 @@
           },
           {
             "internalType": "string",
-            "name": "title",
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
             "type": "string"
           },
           {
             "internalType": "address",
-            "name": "ownerAddress",
+            "name": "landlord",
             "type": "address"
           },
           {
             "internalType": "uint16",
             "name": "area",
             "type": "uint16"
+          },
+          {
+            "internalType": "string",
+            "name": "previewCID",
+            "type": "string"
           },
           {
             "internalType": "string",

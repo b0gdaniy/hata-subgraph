@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class PriceUpdate extends Entity {
+export class Price extends Entity {
   constructor(id: Bytes) {
     super();
     this.set("id", Value.fromBytes(id));
@@ -19,26 +19,24 @@ export class PriceUpdate extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save PriceUpdate entity without an ID");
+    assert(id != null, "Cannot save Price entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.BYTES,
-        `Entities of type PriceUpdate must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Price must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("PriceUpdate", id.toBytes().toHexString(), this);
+      store.set("Price", id.toBytes().toHexString(), this);
     }
   }
 
-  static loadInBlock(id: Bytes): PriceUpdate | null {
-    return changetype<PriceUpdate | null>(
-      store.get_in_block("PriceUpdate", id.toHexString())
+  static loadInBlock(id: Bytes): Price | null {
+    return changetype<Price | null>(
+      store.get_in_block("Price", id.toHexString())
     );
   }
 
-  static load(id: Bytes): PriceUpdate | null {
-    return changetype<PriceUpdate | null>(
-      store.get("PriceUpdate", id.toHexString())
-    );
+  static load(id: Bytes): Price | null {
+    return changetype<Price | null>(store.get("Price", id.toHexString()));
   }
 
   get id(): Bytes {
@@ -135,19 +133,6 @@ export class Property extends Entity {
     this.set("isActive", Value.fromBoolean(value));
   }
 
-  get landlord(): Bytes {
-    let value = this.get("landlord");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set landlord(value: Bytes) {
-    this.set("landlord", Value.fromBytes(value));
-  }
-
   get propertyID(): Bytes {
     let value = this.get("propertyID");
     if (!value || value.kind == ValueKind.NULL) {
@@ -161,8 +146,21 @@ export class Property extends Entity {
     this.set("propertyID", Value.fromBytes(value));
   }
 
-  get title(): string {
-    let value = this.get("title");
+  get landlord(): Bytes {
+    let value = this.get("landlord");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set landlord(value: Bytes) {
+    this.set("landlord", Value.fromBytes(value));
+  }
+
+  get location(): string {
+    let value = this.get("location");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -170,8 +168,8 @@ export class Property extends Entity {
     }
   }
 
-  set title(value: string) {
-    this.set("title", Value.fromString(value));
+  set location(value: string) {
+    this.set("location", Value.fromString(value));
   }
 
   get area(): i32 {
@@ -185,6 +183,19 @@ export class Property extends Entity {
 
   set area(value: i32) {
     this.set("area", Value.fromI32(value));
+  }
+
+  get previewCID(): string {
+    let value = this.get("previewCID");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set previewCID(value: string) {
+    this.set("previewCID", Value.fromString(value));
   }
 
   get price(): BigInt | null {

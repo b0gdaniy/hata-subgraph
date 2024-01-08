@@ -31,8 +31,12 @@ export class ListingAccepted__Params {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get _rentUntil(): BigInt {
+  get _rentStart(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+
+  get _rentUntil(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
@@ -79,12 +83,16 @@ export class Marketplace__getListingResultValue0Struct extends ethereum.Tuple {
     return this[3].toAddress();
   }
 
-  get rentUntil(): BigInt {
+  get rentStart(): BigInt {
     return this[4].toBigInt();
   }
 
+  get rentFinish(): BigInt {
+    return this[5].toBigInt();
+  }
+
   get isNative(): boolean {
-    return this[5].toBoolean();
+    return this[6].toBoolean();
   }
 }
 
@@ -105,12 +113,16 @@ export class Marketplace__getListingWithDataResultValue0Struct extends ethereum.
     return this[3].toAddress();
   }
 
-  get rentUntil(): BigInt {
+  get rentStart(): BigInt {
     return this[4].toBigInt();
   }
 
+  get rentFinish(): BigInt {
+    return this[5].toBigInt();
+  }
+
   get isNative(): boolean {
-    return this[5].toBoolean();
+    return this[6].toBoolean();
   }
 }
 
@@ -119,20 +131,28 @@ export class Marketplace__getListingWithDataResultValue1Struct extends ethereum.
     return this[0].toBytes();
   }
 
-  get title(): string {
+  get location(): string {
     return this[1].toString();
   }
 
-  get ownerAddress(): Address {
-    return this[2].toAddress();
+  get description(): string {
+    return this[2].toString();
+  }
+
+  get landlord(): Address {
+    return this[3].toAddress();
   }
 
   get area(): i32 {
-    return this[3].toI32();
+    return this[4].toI32();
+  }
+
+  get previewCID(): string {
+    return this[5].toString();
   }
 
   get folderCID(): string {
-    return this[4].toString();
+    return this[6].toString();
   }
 }
 
@@ -195,7 +215,7 @@ export class Marketplace extends ethereum.SmartContract {
   getListing(_propertyID: Bytes): Marketplace__getListingResultValue0Struct {
     let result = super.call(
       "getListing",
-      "getListing(bytes32):((uint256,uint8,uint8,address,uint256,bool))",
+      "getListing(bytes32):((uint256,uint8,uint8,address,uint256,uint256,bool))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
 
@@ -209,7 +229,7 @@ export class Marketplace extends ethereum.SmartContract {
   ): ethereum.CallResult<Marketplace__getListingResultValue0Struct> {
     let result = super.tryCall(
       "getListing",
-      "getListing(bytes32):((uint256,uint8,uint8,address,uint256,bool))",
+      "getListing(bytes32):((uint256,uint8,uint8,address,uint256,uint256,bool))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
     if (result.reverted) {
@@ -226,7 +246,7 @@ export class Marketplace extends ethereum.SmartContract {
   ): Marketplace__getListingWithDataResult {
     let result = super.call(
       "getListingWithData",
-      "getListingWithData(bytes32):((uint256,uint8,uint8,address,uint256,bool),(bytes32,string,address,uint16,string))",
+      "getListingWithData(bytes32):((uint256,uint8,uint8,address,uint256,uint256,bool),(bytes32,string,string,address,uint16,string,string))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
 
@@ -247,7 +267,7 @@ export class Marketplace extends ethereum.SmartContract {
   ): ethereum.CallResult<Marketplace__getListingWithDataResult> {
     let result = super.tryCall(
       "getListingWithData",
-      "getListingWithData(bytes32):((uint256,uint8,uint8,address,uint256,bool),(bytes32,string,address,uint16,string))",
+      "getListingWithData(bytes32):((uint256,uint8,uint8,address,uint256,uint256,bool),(bytes32,string,string,address,uint16,string,string))",
       [ethereum.Value.fromFixedBytes(_propertyID)]
     );
     if (result.reverted) {
@@ -328,8 +348,12 @@ export class AcceptListingCall__Inputs {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get _rentUntil(): BigInt {
+  get _rentStart(): BigInt {
     return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get _rentFinish(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
   }
 }
 
@@ -379,6 +403,36 @@ export class CreateListingCall__Outputs {
   _call: CreateListingCall;
 
   constructor(call: CreateListingCall) {
+    this._call = call;
+  }
+}
+
+export class FinishListingCall extends ethereum.Call {
+  get inputs(): FinishListingCall__Inputs {
+    return new FinishListingCall__Inputs(this);
+  }
+
+  get outputs(): FinishListingCall__Outputs {
+    return new FinishListingCall__Outputs(this);
+  }
+}
+
+export class FinishListingCall__Inputs {
+  _call: FinishListingCall;
+
+  constructor(call: FinishListingCall) {
+    this._call = call;
+  }
+
+  get _propertyID(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+}
+
+export class FinishListingCall__Outputs {
+  _call: FinishListingCall;
+
+  constructor(call: FinishListingCall) {
     this._call = call;
   }
 }
